@@ -21,11 +21,17 @@ rm -rf /dev/ppp
 yum install make openssl gcc-c++ ppp iptables pptpd iptables-services
 
 # /etc/ppp/chap-secrets
-pass=`openssl rand 6 -base64`
+username=`vpn`
 if [ "$1" != "" ]
-  then pass=$1
+  then username=$1
 fi
-echo "zhaodg pptpd ${pass} *" >> /etc/ppp/chap-secrets
+
+pass=`openssl rand 6 -base64`
+if [ "$2" != "" ]
+  then pass=$2
+fi
+
+echo "${username} pptpd ${pass} *" >> /etc/ppp/chap-secrets
 
 # /etc/pptpd.conf
 echo "localip 192.168.0.1" >> /etc/pptpd.conf
@@ -68,4 +74,4 @@ iptables -t nat -A POSTROUTING -s 192.168.0.0/24 -o eth0 -j MASQUERADE
 chkconfig pptpd on
 
 
-echo "VPN service is installed, your VPN username is zhaodg, VPN password is ${pass}"
+echo "VPN service is installed, your VPN username is ${username}, VPN password is ${pass}"
