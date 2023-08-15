@@ -21,7 +21,7 @@ rm -rf /dev/ppp
 yum install -y make openssl gcc-c++ ppp iptables pptpd iptables-services
 
 # /etc/ppp/chap-secrets
-username=`vpn`
+username="vpn"
 if [ "$1" != "" ]
   then username=$1
 fi
