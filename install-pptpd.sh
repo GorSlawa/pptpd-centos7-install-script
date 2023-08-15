@@ -18,7 +18,7 @@ rm -rf /etc/ppp
 rm -rf /dev/ppp
 
 # install component
-yum install make openssl gcc-c++ ppp iptables pptpd iptables-services
+yum install -y make openssl gcc-c++ ppp iptables pptpd iptables-services
 
 # /etc/ppp/chap-secrets
 username=`vpn`
